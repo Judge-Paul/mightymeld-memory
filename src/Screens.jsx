@@ -2,6 +2,7 @@ import { useState } from "react";
 import confetti from "canvas-confetti";
 import * as icons from "react-icons/gi";
 import { Tile } from "./Tile";
+import { motion } from "framer-motion";
 
 export const possibleTileContents = [
   icons.GiHearts,
@@ -24,12 +25,25 @@ export function StartScreen({ start }) {
         <p className="pt-6 text-pink-500/90 font-medium">
           Flip over tiles looking for pairs
         </p>
-        <button
+        <motion.button
           onClick={start}
-          className="bg-pink-500 text-white px-10 py-2.5 rounded-full mt-10"
+          className="bg-pink-500 hover:bg-pink-600 text-white px-10 py-2.5 rounded-full mt-10"
+          whileHover={[
+            {
+              scale: 0.9,
+            },
+            {
+              transition: {
+                delay: 5,
+                repeat: 2,
+              },
+              rotate: [0, 10, 0, -10, 0],
+            },
+          ]}
+          whileTap={{ scale: 1.1 }}
         >
           Play
-        </button>
+        </motion.button>
       </div>
     </div>
   );
@@ -121,9 +135,9 @@ export function PlayScreen({ end }) {
       <div className="flex justify-center flex-wrap">
         <div className="w-screen text-center py-14 text-[#646FF1] font-semibold">
           Tries
-          <span className="ml-2 bg-[#C7D2FF] px-2 py-0.5 rounded-md">
+          <motion.span className="ml-2 bg-[#C7D2FF] px-2 py-0.5 rounded-md">
             {tryCount}
-          </span>
+          </motion.span>
         </div>
 
         <div className="w-[320px] bg-[#EFF3FF] rounded-lg flex flex-wrap justify-center py-[15px] gap-3">

@@ -1,3 +1,5 @@
+import { motion } from "framer-motion";
+
 export function Tile({
   content: Content,
   flip,
@@ -42,11 +44,48 @@ export function Tile({
 }
 
 function Back({ className, flip }) {
-  return <div onClick={flip} className={className}></div>;
+  return (
+    <motion.div
+      onClick={flip}
+      className={className}
+      animate={{
+        rotateY: [90, 45, 0],
+        transition: {
+          duration: 0.3,
+        },
+      }}
+      whileHover={[
+        {
+          scale: 0.9,
+        },
+        {
+          transition: {
+            delay: 5,
+            repeat: Infinity,
+          },
+          rotate: [0, 10, 0, -10, 0],
+        },
+      ]}
+    ></motion.div>
+  );
 }
 
 function Front({ className, children }) {
-  return <div className={className}>{children}</div>;
+  return (
+    <motion.div
+      className={className}
+      animate={{
+        rotateY: [115, 90, 45, 0],
+        scale: [0.9, 1],
+        transition: {
+          duration: 0.3,
+        },
+        opacity: [0, 1],
+      }}
+    >
+      {children}
+    </motion.div>
+  );
 }
 
 function Matched({ className, children }) {
